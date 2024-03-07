@@ -19,6 +19,8 @@ Additionally, you will need to accept any Tanzu Application Platform EULAs.
 Utilizing Terraform conventions, make a copy `terraform.tfvars.example` and remove the `.example` extension. Edit this file and add values. Descriptions of the values below:
 
 - `tanzu_network_refresh_token` (string) - The Tanzu network refresh token utilized to download software
+- `tanzu_registry_username` (string) - The Tanzu network username
+- `tanzu_rregistry_password` (string) - The Tanzu network password
 - `ssh_private_key_path` (string) - The path to the private key.  
 Used to SSH into the jumpbox.
     
