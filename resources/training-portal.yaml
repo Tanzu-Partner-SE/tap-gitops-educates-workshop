@@ -1,0 +1,28 @@
+apiVersion: learningcenter.tanzu.vmware.com/v1beta1
+kind: TrainingPortal
+metadata:
+  name: partnerworkshop-evoila
+  annotations:
+    kapp.k14s.io/update-strategy: always-replace
+spec:
+  portal:
+    title: Tanzu Application Platform Demos
+    password: tapworkshop1!
+    registration:
+      type: anonymous
+      enabled: true
+    updates:
+      workshop: true
+    sessions:
+      maximum: 45
+  workshops:
+    - name: tapworkshop-developers
+      expires: 360m
+      orphaned: 120m
+      capacity: 45
+      reserved: 2
+    - name: tapworkshop-operators
+      expires: 360m
+      orphaned: 120m
+      capacity: 20
+      reserved: 1
