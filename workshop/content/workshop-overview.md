@@ -1,22 +1,17 @@
 ![Welcome](exercises/images/welcome.png)
 
 ###### This workshop helps you to get some good understanding on below topics: 
+Stage 1: Perform a base install of Tanzu Application Platform
 
-1. Prepare TAP values file
-2. Complete the pre reqs for installing TAP packages
-3. Install TAP with full profile
-4. Create a workload
-5. Explore App Live view, Supply chain and TAP GUI
-6. Create Accelerators
-7. Metadata store (SBOM)
-8. Explore Tech Docs and API Docs
-9. Security Analysis
-10. Vulnerability Scanning
-11. API Portal
-12. Supply Chain
-13. Aria Operations for Apps
-14. Authentication
-15. Bitnami Services
+Stage 2: Enable Ingress to Tanzu Application Platform
+
+Stage 3: Add Namespace Provisioner to Tanzu Application Platform
+
+Stage 4: Configure Scanning-Testing Supply Chain
+
+Stage 5: Customize TAP Developer Portal
+
+Stage 6: Blow it Away! Reinstall!
 
 ###### For more info, refer to VMware official documentation on TAP 1.7: 
 
