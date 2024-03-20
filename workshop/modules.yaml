@@ -1,6 +1,6 @@
 modules:
     exercises/01-Workshop-overview:
-        name: Pre requisits for this workshop
+        name: Pre requisits
         exit_sign: Next
     exercises/02-Infra-setup.md
         name: Azure Infra 
