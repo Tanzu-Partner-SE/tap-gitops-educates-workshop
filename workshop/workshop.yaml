@@ -2,12 +2,12 @@ name: Markdown Sample
 
 modules:
     activate:
-    - exercises/01-workshop-prereq.md
-    - exercises/02-Infra-setup.md
-    - exercises/03-Workshop-overview.md	
-    - exercises/Stage-1-Base-Install.md
-    - exercises/Stage-2-Ingress.md
-    - exercises/Stage-3-Namespace-Provisioner.md
-    - exercises/Stage-4-Scanning-Testing.md
-    - exercises/Stage-5-Customize-TDP.md
-    - exercises/Stage-6-reinstall.md
+    - exercises/01-workshop-prereq
+    - exercises/02-Infra-setup
+    - exercises/03-Workshop-overview
+    - exercises/Stage-1-Base-Install
+    - exercises/Stage-2-Ingress
+    - exercises/Stage-3-Namespace-Provisioner
+    - exercises/Stage-4-Scanning-Testing
+    - exercises/Stage-5-Customize-TDP
+    - exercises/Stage-6-reinstall
