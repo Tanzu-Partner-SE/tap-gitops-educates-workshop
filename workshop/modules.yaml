@@ -1,22 +1,22 @@
 modules:
-    exercises/01-Workshop-overview:
-        name: Pre requisits
-        exit_sign: Next
+    exercises/01-workshop-prereq.md
+        name: Workshop Prereq 
+        exit_sign: Infra Setup
     exercises/02-Infra-setup.md
-        name: Azure Infra 
+        name: Infra Setup 
         exit_sign: Start Workshop
     exercises/03-Workshop-overview.md
-        name: Preparation to install TAP
-        exit_sign: Basic-Install
+        name: Workshop Overview 
+        exit_sign: Base-Install
     exercises/Stage-1-Base-Install.md
-        name: Install TAP
+        name: Base Install 
         exit_sign: Setup Ingress
     exercises/Stage-2-Ingress.md
         name: Setup Ingress
         exit_sign: Namespace Provisioner
     exercises/Stage-3-Namespace-Provisioner.md
-        name: Setup Namespace 
-        exit_sign: Scanning and Testing
+        name: Namespace Provisioner 
+        exit_sign: Setup Scanning 
     exercises/Stage-4-Scanning-Testing.md
         name: Setup Scanning
         exit_sign: Customize Portal 
