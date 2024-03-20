@@ -13,30 +13,8 @@ Participants need to set up the following prerequisites before attending the wor
 * Account credentials on [Tanzu Network](https://network.tanzu.vmware.com/)
 * Current CLI tools for working with the environment: kubectl, [k9s](https://k9scli.io/topics/install/), git, [github](https://cli.github.com/manual/installation), [SOPS](https://github.com/mozilla/sops/releases) and [age](https://github.com/FiloSottile/age#installation) for encrypting secrets, [Carvel](https://carvel.dev/#install) and Tanzu CLI with plugins.
 
-```dashboard:open-url
-url: https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.7/tap/overview.html
-```
+The workshop team has provided a [complete automation](infrastructure/) for setting up all of the prerequisites on Azure. If participants do not have the prereqs readily available, they are encouraged to use this setup with their Azure account.
 
-###### Short Video on TAP: 
+Participants can track their progress on the prerequisites with a local copy of [this Excel worksheet](https://github.com/tanzu-end-to-end/tap-gitops-workshop/raw/main/Prereqs.xlsx).
 
-```dashboard:open-url
-url: https://www.youtube.com/watch?v=H6rbIkaJ1xc
-```
 
-<p style="color:blue"><strong> Easy path to production using VMware Tanzu Application Platform </strong></p>
-
-```dashboard:open-url
-url: https://www.youtube.com/watch?v=dbWSPQ9tTEk
-```
-
-<p style="color:blue"><strong> Improve Developer Experience using Tanzu Application Platform </strong></p>
-
-```dashboard:open-url
-url: https://www.youtube.com/watch?v=3p9lNSn8DSc
-```
-
-<p style="color:blue"><strong> Securing end to end Kubernetes application supply chain using Tanzu </strong></p>
-
-```dashboard:open-url
-url: https://www.youtube.com/watch?v=V5voRJJ6qTs
-```
