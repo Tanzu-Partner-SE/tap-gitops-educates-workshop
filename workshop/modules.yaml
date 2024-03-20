@@ -1,28 +1,28 @@
 modules:
     exercises/01-workshop-prereq.md
-        name: Workshop Prereq 
-        exit_sign: Infra Setup
+      name: Workshop Prereq 
+      exit_sign: Infra Setup
     exercises/02-Infra-setup.md
-        name: Infra Setup 
-        exit_sign: Start Workshop
+      name: Infra Setup 
+      exit_sign: Start Workshop
     exercises/03-Workshop-overview.md
-        name: Workshop Overview 
-        exit_sign: Base-Install
+      name: Workshop Overview 
+      exit_sign: Base-Install
     exercises/Stage-1-Base-Install.md
-        name: Base Install 
-        exit_sign: Setup Ingress
+      name: Base Install 
+      exit_sign: Setup Ingress
     exercises/Stage-2-Ingress.md
-        name: Setup Ingress
-        exit_sign: Namespace Provisioner
+      name: Setup Ingress
+      exit_sign: Namespace Provisioner
     exercises/Stage-3-Namespace-Provisioner.md
-        name: Namespace Provisioner 
-        exit_sign: Setup Scanning 
+      name: Namespace Provisioner 
+      exit_sign: Setup Scanning 
     exercises/Stage-4-Scanning-Testing.md
-        name: Setup Scanning
-        exit_sign: Customize Portal 
+      name: Setup Scanning
+      exit_sign: Customize Portal 
     exercises/Stage-5-Customize-TDP.md
-        name: Customize Portal 
-        exit_sign: Re-Deploy
+      name: Customize Portal 
+      exit_sign: Re-Deploy
     exercises/Stage-6-reinstall.md
-        name: Reinstall 
-        exit_sign: Finish Workshop
+      name: Reinstall 
+      exit_sign: Finish Workshop
