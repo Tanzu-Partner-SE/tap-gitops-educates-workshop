@@ -1,4 +1,4 @@
-# Tanzu Application Platform GitOps Workshop
+## Tanzu Application Platform GitOps Workshop
 
 Welcome! In this hands-on workshop, participants will learn GitOps benefits and best practices. They will bring their own Kubernetes cluster and perform a fresh deployment of TAP using the GitOps installer. They will experiment with incrementally adding new features, in-place upgrades, and uninstall-restore. We will discuss how to preconfigure working environments for pilots, so that customers are spending time getting value from TAP, not learning the install process.
 
@@ -16,5 +16,3 @@ Participants need to set up the following prerequisites before attending the wor
 The workshop team has provided a [complete automation](infrastructure/) for setting up all of the prerequisites on Azure. If participants do not have the prereqs readily available, they are encouraged to use this setup with their Azure account.
 
 Participants can track their progress on the prerequisites with a local copy of [this Excel worksheet](https://github.com/tanzu-end-to-end/tap-gitops-workshop/raw/main/Prereqs.xlsx).
-
-
