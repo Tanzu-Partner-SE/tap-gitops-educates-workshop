@@ -3,13 +3,13 @@ modules:
         name: Pre requisits for this workshop
         exit_sign: Next
     exercises/02-Infra-setup.md
-        name: Infra Set up in Azure
+        name: Azure Infra 
         exit_sign: Start Workshop
     exercises/03-Workshop-overview.md
         name: Preparation to install TAP
         exit_sign: Basic-Install
     exercises/Stage-1-Base-Install.md
-        name: Install TAP with full profile
+        name: Install TAP
         exit_sign: Setup Ingress
     exercises/Stage-2-Ingress.md
         name: Setup Ingress
@@ -18,11 +18,11 @@ modules:
         name: Setup Namespace 
         exit_sign: Scanning and Testing
     exercises/Stage-4-Scanning-Testing.md
-        name: Setup Scanning and Testing 
+        name: Setup Scanning
         exit_sign: Customize Portal 
     exercises/Stage-5-Customize-TDP.md
-        name: Customize your developer portal
+        name: Customize Portal 
         exit_sign: Re-Deploy
     exercises/Stage-6-reinstall.md
-        name: Blow it away! Reinstall! 
+        name: Reinstall 
         exit_sign: Finish Workshop
