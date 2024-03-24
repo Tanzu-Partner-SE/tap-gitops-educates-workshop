@@ -40,10 +40,11 @@ Used to SSH into the jumpbox.
   **NOTE:** If you choose to use a GitHub Personal Access Token, the minimum required scopes for the `gh` CLI are `repo` (all) and `read:org`. You can add scopes for your tokens in the [GitHub Token Settings](https://github.com/settings/tokens/).
 Utilizing Terraform conventions, make a copy `terraform.tfvars.example` and remove the `.example` extension. Edit this file and add values. Descriptions of the values below:
   ```execute
-  cp $HOME/infrastructure/terraform.tfvars.example terraform.tfvars
+  cd $HOME/infrastructure
+  cp $HOME/infrastructure/terraform.tfvars.example $HOME/infrastructure/terraform.tfvars
   ``` 
   ```editor:open-file
-  file: ~/infrastructure/terraform.tfvars
+  file: $HOME/infrastructure/terraform.tfvars
   ```
 ## Build Infrastructure
 
