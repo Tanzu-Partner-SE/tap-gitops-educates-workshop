@@ -25,10 +25,10 @@ Utilizing Terraform conventions, make a copy `terraform.tfvars.example` and remo
 Used to SSH into the jumpbox.
     
   **NOTE:** For Azure, you must use an RSA SSH key, and it's recommended that your key indicate your desired SSH username (not email) or you may have validation issues with the Azure terraform module.  
-  If you need to generate a new key, here's an example that will create a new keypair in your current directory:
+  If you need to generate a new key, here's an example that will create a new keypair in your current directory: Let's use username as tapworkshopuser
 
-  ```shell
-  ssh-keygen -m PEM -t rsa -b 4096 -f "./azure-workshop-ssh" -C "$USER"
+  ```execute
+  ssh-keygen -m PEM -t rsa -b 4096 -f "./azure-workshop-ssh" -C tapworkshopuser
   ```
 - `ssh_private_key_passphrase_protected` (bool) - On whether the SSH key has a passphrase (true) or not (false)
 - `ssh_public_key_path` (string) - The path to the public SSH key. Used in the setup of the jumpbox.
