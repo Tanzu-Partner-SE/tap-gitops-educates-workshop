@@ -16,7 +16,7 @@ Additionally, you will need to accept any Tanzu Application Platform EULAs.
 
 ## Configuration
 
-Utilizing Terraform conventions, make a copy `terraform.tfvars.example` and remove the `.example` extension. Edit this file and add values. Descriptions of the values below:
+Prepare the variables for installation
 
 - `tanzu_network_refresh_token` (string) - The Tanzu network refresh token utilized to download software
 - `tanzu_registry_username` (string) - The Tanzu network username
@@ -38,7 +38,13 @@ Used to SSH into the jumpbox.
   ssh-keygen -m PEM -t rsa -b 4096 -f "./azure-workshop-ssh" -C tapworkshopuser
   ```  
   **NOTE:** If you choose to use a GitHub Personal Access Token, the minimum required scopes for the `gh` CLI are `repo` (all) and `read:org`. You can add scopes for your tokens in the [GitHub Token Settings](https://github.com/settings/tokens/).
-
+Utilizing Terraform conventions, make a copy `terraform.tfvars.example` and remove the `.example` extension. Edit this file and add values. Descriptions of the values below:
+  ```execute
+  cp $HOME/infrastructure/terraform.tfvars.example terraform.tfvars
+  ``` 
+  ```editor:open-file
+  file: ~/infrastructure/terraform.tfvars
+  ```
 ## Build Infrastructure
 
 1. [Sign in with Azure CLI](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli)
