@@ -18,17 +18,22 @@ Participants will run the workshop in stages, where they perform a base install 
 
 Run the following commands to check to see if a few CLIs are functioning properly.
 
-```bash
- # Tanzu Network auth check
+
+ ### Tanzu Network auth check
+ ``` execute
 pivnet eulas
+```
 
-# GitHub auth check
+### GitHub auth check
+ ``` execute
 gh auth status
-
-# Tanzu CLI installed check
+```
+### Tanzu CLI installed check
+ ``` execute
 tanzu version # should be v0.90 at least
-
-# Tanzu CLI plugins check; reinstall via "tanzu plugin install --group vmware-tap/default:v1.6.1"
+```
+### Tanzu CLI plugins check; reinstall via "tanzu plugin install --group vmware-tap/default:v1.6.1"
+ ``` execute
 tanzu plugin list
 ```
 
