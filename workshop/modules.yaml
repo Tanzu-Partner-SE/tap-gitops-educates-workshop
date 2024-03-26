@@ -1,9 +1,9 @@
 modules:
     exercises/01-workshop-prereq:
       name: Workshop Prereq 
-      exit_sign: Infra Setup
+      exit_sign: Infra Setup on Azure
     exercises/02-Infra-setup:
-      name: Infra Setup 
+      name: Infra Setup on Azure
       exit_sign: Start Workshop
     exercises/03-Workshop-overview:
       name: Workshop Overview 
