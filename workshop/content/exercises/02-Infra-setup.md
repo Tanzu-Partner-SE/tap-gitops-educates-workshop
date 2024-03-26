@@ -66,12 +66,12 @@ Apply the Terraform scripts
 terraform apply -auto-approve
 ````
 
-## Infrastructure Information
+### Infrastructure Information
 
 During the installation of this workshop, some infrastructure information will be required. To obtain it, run the following commands to get AKS and ACR information.
 
 
-# SSH information, ACR and AKS info
+### SSH information, ACR and AKS info
 ```execute
 terraform output
 ```
@@ -83,7 +83,7 @@ terraform output azure_container_registry_password
 
 ### Jumpbox
 #### Login to Jumpbox replace xx.xx.xx.xx with the ip address of the Jumpbox
-```coopy
+```copy
 ssh tapworkshopuser@xx.xx.xx.xx -i /home/eduk8s/azure-workshop-ssh -o StrictHostKeyChecking=no
 ```
 The jumpbox contains a variety of tools as well as the kubeconfig for the AKS cluster. Installed tools:
@@ -130,7 +130,7 @@ Verify errors in the runcmd script
 ```execute
 sudo vim /var/lib/cloud/instance/scripts/runcmd
 ```
-##Caution !! only for recreating Jumpbox
+## Caution!! only for recreating Jumpbox
 Additionally, if you need to recreate the jumpbox, the Terraform command below will save some time by only recreating it:
 
 ```copy
