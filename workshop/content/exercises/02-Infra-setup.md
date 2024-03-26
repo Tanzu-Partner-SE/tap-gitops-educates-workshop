@@ -133,6 +133,6 @@ sudo vim /var/lib/cloud/instance/scripts/runcmd
 
 Additionally, if you need to recreate the jumpbox, the Terraform command below will save some time by only recreating it:
 
-```execute
+```copy
 terraform apply -auto-approve -replace="azurerm_linux_virtual_machine.jump-server-vm
 ```
