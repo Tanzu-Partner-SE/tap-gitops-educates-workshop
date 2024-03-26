@@ -48,34 +48,44 @@ Utilizing Terraform conventions, make a copy `terraform.tfvars.example` and remo
   ```
 ## Build Infrastructure
 
-1. Sign in with Azure Portal
+Sign in with Azure Portal
 ```execute
 az login
 ```
 Follow the instructions
-1. Run 
+Init the Terraform
 ```execute
 terraform init`
 ```
-1. Run `terraform plan`
-1. Run `terraform apply -auto-approve`
+Plan the Terraform scripts
+```execute
+terraform plan
+```
+Apply the Terraform scripts
+```execute
+terraform apply -auto-approve
+````
 
 ## Infrastructure Information
 
 During the installation of this workshop, some infrastructure information will be required. To obtain it, run the following commands to get AKS and ACR information.
 
-```console
+
 # SSH information, ACR and AKS info
+```execute
 terraform output
 ```
-
-```console
+## Note the ip address of your jumpbox
 # ACR admin password
+```execute
 terraform output azure_container_registry_password
 ```
 
 ### Jumpbox
-
+## Login to Jumpbox replace xx.xx.xx.xx with the ip address of the Jumpbox
+```execute
+ssh tapworkshopuser@xx.xx.xx.xx -i /home/eduk8s/azure-workshop-ssh -o StrictHostKeyChecking=no
+```
 The jumpbox contains a variety of tools as well as the kubeconfig for the AKS cluster. Installed tools:
 
 - brew
@@ -102,22 +112,27 @@ During the setup of the jumpbox, [Cloud-init](https://cloudinit.readthedocs.io/)
 
 If for some reason Cloud-init fails, SSH into the jump server. You can run some of the commands below to help troubleshoot the issue.
 
-```console
-# Get the status of Cloud-init
+
+Get the status of Cloud-init
+```execute
 cloud-init status
+```
 
-# Check the Cloud-init log for errors in [cloud-config.yaml](./cloud-init/cloud-config.yaml)
+Check the Cloud-init log for errors in [cloud-config.yaml](./cloud-init/cloud-config.yaml)
+```execute
 sudo cat /var/log/cloud-init.log
-
-# Check the Cloud-init output log for errors in the [scripts](./scripts/)
+```
+Check the Cloud-init output log for errors in the [scripts](./scripts/)
+```execute
 sudo cat /var/log/cloud-init-output.log
-
-# Verify errors in the runcmd script
+```
+Verify errors in the runcmd script
+```execute
 sudo vim /var/lib/cloud/instance/scripts/runcmd
 ```
 
 Additionally, if you need to recreate the jumpbox, the Terraform command below will save some time by only recreating it:
 
-```bash
-terraform apply -auto-approve -replace="azurerm_linux_virtual_machine.jump-server-vm"
+```execute
+terraform apply -auto-approve -replace="azurerm_linux_virtual_machine.jump-server-vm
 ```
