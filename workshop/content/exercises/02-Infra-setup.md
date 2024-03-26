@@ -48,8 +48,15 @@ Utilizing Terraform conventions, make a copy `terraform.tfvars.example` and remo
   ```
 ## Build Infrastructure
 
-1. [Sign in with Azure CLI](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli)
-1. Run `terraform init`
+1. Sign in with Azure Portal
+```execute
+az login
+```
+Follow the instructions
+1. Run 
+```execute
+terraform init`
+```
 1. Run `terraform plan`
 1. Run `terraform apply -auto-approve`
 
