@@ -5,16 +5,19 @@ In stage 1, we will perform a minimal install of a single-cluster TAP environmen
 ### Base working directory
 
 Create a base working directory on your local machine for these workshop activities. Assign that directory path to the environment variable WORKSHOP_ROOT
-
-```bash
-export WORKSHOP_ROOT=/path/to/my/basedir
+``` execute
+mkdir tap
+````
+```execute
+export WORKSHOP_ROOT=$HOME/tap
 ```
 
 Because you will likely use multiple shells during this workshop, it is highly recommend to use `direnv` to set the `WORKSHOP_ROOT` variable. In the azure jump-server setup, the top-level `.envrc` file is in the home-directory.
 
-```bash
-# for azure jump-server users:
-# append workshop root to the home direnv config
+
+for azure jump-server users:
+append workshop root to the home direnv config
+```execute
 echo export WORKSHOP_ROOT=\"$WORKSHOP_ROOT\" >> ~/.envrc
 direnv allow
 ```
@@ -27,14 +30,14 @@ Here we will create the GitOps repo that records the configuration of your TAP i
 
 First, download the base template for your repo from TanzuNet. Go the [latest release page for Tanzu Application Platform](https://network.tanzu.vmware.com/products/tanzu-application-platform/#/releases/1346010), and download `tanzu-gitops-ri-0.2.5.tgz` to your local machine. Copy the tgz file to $WORKSHOP_ROOT. An alternative is to use the pivnet CLI to download it with the following command:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 pivnet download-product-files --product-slug='tanzu-application-platform' --release-version='1.6.1' --product-file-id=1549358
 ```
 
 Initialize the Git repo on your local machine:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 mkdir -p workshop-clusters
 tar xvf tanzu-gitops-ri-0.2.5.tgz -C workshop-clusters
@@ -47,7 +50,7 @@ It is important that we name this control repo "`workshop-clusters`" to simplify
 
 Now push the local repo to Github, where your cluster can access it. If you have the Github CLI installed, you can do this with:
 
-```bash
+```execute
 gh repo create --source . --push --private
 ```
 
@@ -55,19 +58,19 @@ This repo does not need to be private, but it's good hygiene.
 
 The repo we have created can store the configuration for **all** of your TAP clusters. Each cluster will have its own subfolder in the GitOps repo where its configuration is stored. Let's create the cluster subfolder for `workshop`, which will be the name of our workshop cluster.
 
-```bash
-# ignore the "Next steps" that are outputted
+
+ignore the "Next steps" that are outputted
+```execute
 ./setup-repo.sh workshop sops
 ```
 
 The `sops` argument indicates that we will be using SOPS Secret Management (with Age encryption) to securely store the secrets that are needed to configure our cluster.
 
-```bash
+```execute
 git add .
 git status
 ```
-
-```bash
+``` execute
 git commit -m 'Generate workshop cluster'
 ```
 
@@ -77,7 +80,7 @@ git commit -m 'Generate workshop cluster'
 
 Clone this repo into your workshop root directory. It won't be part of your GitOps install, but it contains some template files we can copy into your repo to get you started quickly:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 git clone https://github.com/tanzu-end-to-end/tap-gitops-workshop
 cp tap-gitops-workshop/templates/install/tap-values.yaml workshop-clusters/clusters/workshop/cluster-config/values
@@ -92,6 +95,9 @@ Open this file (`$WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-conf
 * Username for the container registry
 * Kubernetes version
 
+``` execute
+vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml
+```
 ### Add secrets to your configuration
 
 We're almost ready to install TAP, but we're still missing some key configuration values needed by the platform: our Github developer token, our registry password, and our TanzuNet credentials.
@@ -100,7 +106,7 @@ Hmmm. These are all sensitive pieces of information, and we have no interest in 
 
 Go back to $WORKSHOP_ROOT. We are going to create a dedicated subdirectory `enc` to store this sensitive encryption stuff, and keep it out of our GitOps repo:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 mkdir enc
 cd enc
@@ -116,16 +122,22 @@ We used `age` to generate an encryption key for our repo (it's `key.txt`, don't 
 
 Open these two files, `tanzu-sync-values.yaml` and `tap-sensitive-values.yaml`, in an editor. Fill out these files as described with your Github developer token, registry credentials, and TanzuNet credentials in plain text. You will also be adding your encryption key here, which you can get by typing `cat key.txt`.
 
+``` execute
+vi tanzu-sync-values.yaml
+```
+``` execute
+vi tap-sensitive-values.yaml
+```
 Now we will encrypt the files:
 
-```bash
+```execute
 sops --encrypt tanzu-sync-values.yaml > tanzu-sync-values.sops.yaml
 sops --encrypt tap-sensitive-values.yaml > tap-sensitive-values.sops.yaml
 ```
 
 The encrypted files, with the `.sops.yaml` suffix, are safe to store in your GitOps repo, so let's move them there:
 
-```bash
+```execute
 mv tanzu-sync-values.sops.yaml ../workshop-clusters/clusters/workshop/tanzu-sync/app/sensitive-values
 mv tap-sensitive-values.sops.yaml ../workshop-clusters/clusters/workshop/cluster-config/values
 ```
@@ -136,7 +148,7 @@ mv tap-sensitive-values.sops.yaml ../workshop-clusters/clusters/workshop/cluster
 
 OK, we've got our cluster configuration the way we want it. Let's commit to Git, then we will run a configuration script to point our cluster at its associated GitOps repo.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/workshop-clusters
 git add . && git commit -m "Configure workshop cluster encryption, domain, and credentials"
 git push -u origin main 
@@ -147,7 +159,7 @@ cd clusters/workshop
 
 Now, let's commit again to pick up the assets that were created by the configuration script.
 
-```bash
+```execute
 git add cluster-config/ tanzu-sync/
 git commit -m "Configure install of TAP 1.6"
 git push
@@ -155,7 +167,7 @@ git push
 
 We're ready to install! Please make sure that your kubeconfig is pointed at the cluster where you want to install TAP. Now, we can run the deployment script, which will sync the cluster to the GitOps repo, and kick off the install.
 
-```bash
+```execute
 ./tanzu-sync/scripts/deploy.sh
 ```
 
