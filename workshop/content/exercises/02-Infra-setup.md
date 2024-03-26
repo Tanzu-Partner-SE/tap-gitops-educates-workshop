@@ -75,15 +75,15 @@ During the installation of this workshop, some infrastructure information will b
 ```execute
 terraform output
 ```
-## Note the ip address of your jumpbox
-# ACR admin password
+Note the ip address of your jumpbox
+#### ACR admin password
 ```execute
 terraform output azure_container_registry_password
 ```
 
 ### Jumpbox
-## Login to Jumpbox replace xx.xx.xx.xx with the ip address of the Jumpbox
-```execute
+#### Login to Jumpbox replace xx.xx.xx.xx with the ip address of the Jumpbox
+```coopy
 ssh tapworkshopuser@xx.xx.xx.xx -i /home/eduk8s/azure-workshop-ssh -o StrictHostKeyChecking=no
 ```
 The jumpbox contains a variety of tools as well as the kubeconfig for the AKS cluster. Installed tools:
@@ -108,7 +108,7 @@ After the tools are installed, automatic login into the Tanzu Network and GitHub
 
 During the setup of the jumpbox, [Cloud-init](https://cloudinit.readthedocs.io/) is utilized. Terraform will wait until this process is complete.
 
-### Troubleshooting
+#### Troubleshooting
 
 If for some reason Cloud-init fails, SSH into the jump server. You can run some of the commands below to help troubleshoot the issue.
 
@@ -130,7 +130,7 @@ Verify errors in the runcmd script
 ```execute
 sudo vim /var/lib/cloud/instance/scripts/runcmd
 ```
-
+##Caution !! only for recreating Jumpbox
 Additionally, if you need to recreate the jumpbox, the Terraform command below will save some time by only recreating it:
 
 ```copy
