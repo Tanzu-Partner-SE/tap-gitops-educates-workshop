@@ -12,7 +12,7 @@ We will call resources like TLSCertificateDelegation, which depend on CRDs that 
 
 First, let's move all of our dependent resources into their own directory, outside of the `cluster-config/config` folder that automatically syncs to our cluster.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 mkdir workshop-clusters/clusters/workshop/cluster-config/dependent-resources
 mv workshop-clusters/clusters/workshop/cluster-config/config/general/tls-certificate-delegation.yaml workshop-clusters/clusters/workshop/cluster-config/dependent-resources
@@ -21,7 +21,7 @@ mv workshop-clusters/clusters/workshop/cluster-config/config/workloads workshop-
 
 Now, we will install the kapp that will sync the dependent-resources folder to our cluster. We will put it in the `tanzu-sync` namespace to sit alongside our GitOps installer kapp.
 
-```bash
+```execute
 cp tap-gitops-workshop/templates/reinstall/kapp-dependent-resources.yaml workshop-clusters/clusters/workshop/cluster-config/config/general
 ```
 
@@ -31,7 +31,7 @@ cp tap-gitops-workshop/templates/reinstall/kapp-dependent-resources.yaml worksho
         url: https://github.com/<GITHUB-ACCOUNT>/workshop-clusters
 ```
 
-```bash
+```execute
 vim workshop-clusters/clusters/workshop/cluster-config/config/general/kapp-dependent-resources.yaml
 ```
 
@@ -44,7 +44,7 @@ This tells kapp-controller not to sync the dependent-resources until after the k
 
 Let's commit the changes to our GitOps repo, causing them to sync to our cluster.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/workshop-clusters
 git add . && git commit -m "Create dependent resources that wait for pkgi"
 git push -u origin main
@@ -54,7 +54,7 @@ git push -u origin main
 
 Now, we have a cluster configuration that is idempotent and can be safely deleted. So, let's uninstall TAP:
 
-```bash
+```execute
 kapp delete -a tanzu-sync -n default
 ```
 
@@ -64,7 +64,7 @@ Using a tool like k9s, you can monitor the progress of the `pkgi` resources in t
 
 Once the uninstall process is complete, you have a clean cluster, and you can reinstall everything in a single operation:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/workshop-clusters/clusters/workshop
 export SOPS_AGE_KEY=$(cat ../../../enc/key.txt)
 ./tanzu-sync/scripts/deploy.sh

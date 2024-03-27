@@ -18,7 +18,7 @@ Open your `tap-values.yaml` file, and add the following configuration under `tap
 ```
 
 Commit your changes to the GitOps repo:
-```bash
+```execute
 cd $WORKSHOP_ROOT/workshop-clusters
 git add . && git commit -m "Added TDP catalog entry"
 git push -u origin main
@@ -48,7 +48,7 @@ Click 'Register application'. On the next screen, you will be shown your Client 
 
 The ID and secret should be added to your `tap-values.yaml`, but these are sensitive values, so we'll need to encrypt them:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/enc
 vim tap-sensitive-values.yaml
 ```
@@ -69,7 +69,7 @@ tap_install:
 
 Fill in the client ID/secret you generated, and then we'll encrypt the new values.
 
-```bash
+```execute
 export SOPS_AGE_RECIPIENTS=$(age-keygen -y key.txt)
 sops --encrypt tap-sensitive-values.yaml > tap-sensitive-values.sops.yaml
 mv tap-sensitive-values.sops.yaml ../workshop-clusters/clusters/workshop/cluster-config/values
@@ -77,7 +77,7 @@ mv tap-sensitive-values.sops.yaml ../workshop-clusters/clusters/workshop/cluster
 
 You know the drill, commit your changes!
 Commit your changes to the GitOps repo:
-```bash
+```execute
 cd $WORKSHOP_ROOT/workshop-clusters
 git add . && git commit -m "Added Github repo support to accelerators"
 git push -u origin main

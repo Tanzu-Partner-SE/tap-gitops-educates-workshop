@@ -5,7 +5,7 @@
 In the previous exercise, we managed the environment like an Iterate cluster, and provisioned namespaces for application developers. Now, we'll see what it is like to manage a [Build Cluster](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap-reference-architecture/GUID-reference-designs-tap-architecture-planning.html#build-cluster-requirements-1). We will replace our developer namespace with a namespace that can host workloads, and run them through a secure software supply chain to create compliant deployments.
 
 **IMPORTANT**: Due to a current limitation in Carvel, we must delete our workloads from a namespace before deleting the namespace. Otherwise, the deletion process get stuck and it's a hassle. Remove the workloads from your developer namespace:
-```bash
+```execute
 kubectl delete workloads --all -n developer-ns
 ```
 
@@ -22,7 +22,7 @@ namespaces:
 
 The workload namespace is going to require additional resources beyond what we installed in the developer namespace. We'll need a Tekton Pipeline that knows how to execute unit tests for our workloads, and we'll need a `ScanPolicy` resource that determines what our threshold is for security vulnerabilities in the supply chain. Let's copy these resources into our namespace provisioner, so that they will be installed with each workload namespace:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 cp tap-gitops-workshop/templates/supply-chain/namespace-resources/* workshop-clusters/clusters/workshop/cluster-config/namespace-provisioner/namespace-resources
 ```
@@ -47,7 +47,7 @@ Now we will set up a supply chain appropriate for our build cluster. The default
 
 Next, let's configure the supply chain itself. Create an empty repo in your Github org called `tap-deliveries`. You can do this with:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 gh repo create tap-deliveries --private
 ```
@@ -77,14 +77,14 @@ Finally, add this field to the `tap_gui` stanza of your `tap-values.yaml` file s
 
 Now, we will add a workload to the Build cluster to run through the supply chain. As platform engineers, we will schedule all of our workloads through GitOps. This gives us visibility and auditability of every build that runs on the server. Let's create a workloads folder that contains all of our workloads for this build cluster, and add a workload that is scheduled for our `workload-ns` namespace.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 cp -R tap-gitops-workshop/templates/supply-chain/workloads workshop-clusters/clusters/workshop/cluster-config/config
 ```
 
 Let's commit the changes to our GitOps repo, causing them to sync to our cluster.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/workshop-clusters
 git add . && git commit -m "Added scanning and testing supply chain"
 git push -u origin main
@@ -92,7 +92,7 @@ git push -u origin main
 
 Once the workload has been created, you can either view it in The Tanzu Developer Portal (formerly known as TAP GUI) or by running the following command:
 
-```bash
+```execute
 tanzu apps workload tail tanzu-java-web-app --namespace workload-ns --timestamp --since 1h
 ```
 
