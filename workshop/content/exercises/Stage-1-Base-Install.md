@@ -32,7 +32,7 @@ First, download the base template for your repo from TanzuNet. Go the [latest re
 
 ```execute
 cd $WORKSHOP_ROOT
-pivnet download-product-files --product-slug='tanzu-application-platform' --release-version='1.6.1' --product-file-id=1549358
+pivnet download-product-files --product-slug='tanzu-application-platform' --release-version='1.8.1' --product-file-id=1739744
 ```
 
 Initialize the Git repo on your local machine:
@@ -40,7 +40,7 @@ Initialize the Git repo on your local machine:
 ```execute
 cd $WORKSHOP_ROOT
 mkdir -p workshop-clusters
-tar xvf tanzu-gitops-ri-0.2.5.tgz -C workshop-clusters
+tar xvf tanzu-gitops-ri-0.4.1.tgz -C workshop-clusters
 cd workshop-clusters
 git init -b main
 git add . && git commit -m "Initialize Tanzu GitOps RI"

@@ -16,22 +16,21 @@ kubectl get service envoy -n tanzu-system-ingress
 
 You should see output similar to the following:
 
-```execute
-$ kubectl get service envoy -n tanzu-system-ingress
-NAME    TYPE           CLUSTER-IP   EXTERNAL-IP   PORT(S)                      AGE
-envoy   LoadBalancer   10.0.73.9    4.151.25.22   80:31334/TCP,443:31095/TCP   5d19h
-```
 
 Take the value in the "External-IP" column, and enter it into Column E of the worksheet for your domain. Let the instructor know that you've entered it, so that they can update the DNS record.
 
 ## Install the certificate
 
 Create a certificates directory:
-```bash
+```execute
 mkdir $WORKSHOP_ROOT/certificates
 ```
 Go to the spreadsheet, and download the certificate (fullchain.pem) and the private key (privkey.pem) in columns B and C for your domain. Copy these 2 files into the `certificates` directory you created.
 ## If you are using your own domain and you need a self signged certificate follow the below instructions
+go to certifcates directory
+```execute
+cd $WORKSHOP_ROOT/certificates
+```
 Install certboat
 ```execute
 sudo snap install --classic certbot
@@ -46,20 +45,22 @@ certbot certonly --manual --preferred-challenges=dns --email=your-email --agree-
 ```
 Copy the certificate to $WORKSHOP_ROOT/certificates
 ``` copy
-cp $WORKSHOP_ROOT/certificates/your domain name/live/educates/your domain name/fullchain.pem $WORKSHOP_ROOT/certificates/fullchain.pem
-cp $WORKSHOP_ROOT/certificates/your domain name/live/educates/your domain name/privkey.pem $WORKSHOP_ROOT/certificates/privkey.pem
+cp $WORKSHOP_ROOT/certificates/your domain name/live/your domain name/fullchain.pem $WORKSHOP_ROOT/certificates/fullchain.pem
+```
+```copy
+cp $WORKSHOP_ROOT/certificates/your domain name/live/your domain name/privkey.pem $WORKSHOP_ROOT/certificates/privkey.pem
 ```
 Create the tls certificate
 ``` copy
-kubectl create secret tls your domain name-tls --cert=$WORSHOP-ROOT/certificates/fullchain.pem --key=$WORSHOP-ROOT/certificates/privkey.pem --dry-run=client -o yaml > example.com-tls.yaml
+kubectl create secret tls your domain name-tls --cert=/home/tapworkshopuser/tap/certificates/fullchain.pem --key=/home/tapworkshopuser/tap/certificates/privkey.pem --dry-run=client -o yaml > example.com-tls.yaml
 ```
 
 
 Now, let's create a secret for this certificate that can be installed onto our cluster. Be sure to replace the filenames in this command with the filenames of your certificate files.
 ```execute
 cd $WORKSHOP_ROOT/certificates
-chmod 600 workshopx-privkey.pem
-kubectl create secret tls tls -n contour-tls --cert=workshopx-fullchain.pem --key=workshopx-privkey.pem --dry-run=client -o yaml > $WORKSHOP_ROOT/enc/certificate.yaml
+chmod 600 privkey.pem
+kubectl create secret tls tls -n contour-tls --cert=fullchain.pem --key=privkey.pem --dry-run=client -o yaml > $WORKSHOP_ROOT/enc/certificate.yaml
 ```
 
 This certificate file has sensitive private key data, so we need to encrypt it before adding it to our cluster's GitOps repo.

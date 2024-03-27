@@ -55,7 +55,7 @@ az login
 Follow the instructions
 Init the Terraform
 ```execute
-terraform init`
+terraform init
 ```
 Plan the Terraform scripts
 ```execute
