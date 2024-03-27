@@ -10,13 +10,13 @@ VMware employees can access the [Domains and Certificates Spreadsheet](https://o
 
 1. Fetch the external IP address of the contour ingress:
 
-```bash
+```execute
 kubectl get service envoy -n tanzu-system-ingress
 ```
 
 You should see output similar to the following:
 
-```bash
+```execute
 $ kubectl get service envoy -n tanzu-system-ingress
 NAME    TYPE           CLUSTER-IP   EXTERNAL-IP   PORT(S)                      AGE
 envoy   LoadBalancer   10.0.73.9    4.151.25.22   80:31334/TCP,443:31095/TCP   5d19h
@@ -31,9 +31,32 @@ Create a certificates directory:
 mkdir $WORKSHOP_ROOT/certificates
 ```
 Go to the spreadsheet, and download the certificate (fullchain.pem) and the private key (privkey.pem) in columns B and C for your domain. Copy these 2 files into the `certificates` directory you created.
+## If you are using your own domain and you need a self signged certificate follow the below instructions
+Install certboat
+```execute
+sudo snap install --classic certbot
+```
+Create the certificate using the below command. Change the domain name to your domain name
+``` copy
+mkdir "your domain name"
+```
+replace domain name with your domain name
+``` copy
+certbot certonly --manual --preferred-challenges=dns --email=your-email --agree-tos -d "*.your domain name" --config-dir=your domain name/ --work-dir=your domain name/ --logs-dir=your domain name/
+```
+Copy the certificate to $WORKSHOP_ROOT/certificates
+``` copy
+cp $WORKSHOP_ROOT/certificates/your domain name/live/educates/your domain name/fullchain.pem $WORKSHOP_ROOT/certificates/fullchain.pem
+cp $WORKSHOP_ROOT/certificates/your domain name/live/educates/your domain name/privkey.pem $WORKSHOP_ROOT/certificates/privkey.pem
+```
+Create the tls certificate
+``` copy
+kubectl create secret tls your domain name-tls --cert=$WORSHOP-ROOT/certificates/fullchain.pem --key=$WORSHOP-ROOT/certificates/privkey.pem --dry-run=client -o yaml > example.com-tls.yaml
+```
+
 
 Now, let's create a secret for this certificate that can be installed onto our cluster. Be sure to replace the filenames in this command with the filenames of your certificate files.
-```bash
+```execute
 cd $WORKSHOP_ROOT/certificates
 chmod 600 workshopx-privkey.pem
 kubectl create secret tls tls -n contour-tls --cert=workshopx-fullchain.pem --key=workshopx-privkey.pem --dry-run=client -o yaml > $WORKSHOP_ROOT/enc/certificate.yaml
@@ -41,7 +64,7 @@ kubectl create secret tls tls -n contour-tls --cert=workshopx-fullchain.pem --ke
 
 This certificate file has sensitive private key data, so we need to encrypt it before adding it to our cluster's GitOps repo.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/enc
 export SOPS_AGE_RECIPIENTS=$(age-keygen -y key.txt)
 sops --encrypt certificate.yaml > certificate.sops.yaml
@@ -49,7 +72,7 @@ sops --encrypt certificate.yaml > certificate.sops.yaml
 
 Let's create a general folder in our GitOps repo for Kubernetes resources that we want to sync to our workshop cluster, and copy our SOPS-encrypted certificate secret there.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 mkdir workshop-clusters/clusters/workshop/cluster-config/config/general
 mv enc/certificate.sops.yaml workshop-clusters/clusters/workshop/cluster-config/config/general
@@ -57,7 +80,7 @@ mv enc/certificate.sops.yaml workshop-clusters/clusters/workshop/cluster-config/
 
 We will copy some additional resources we want to deploy into this general folder: the namespace where our certificate secret will live, and a [TlsCertificateDelegation](https://projectcontour.io/docs/1.25/config/tls-delegation/) resource that instructs Contour to use this wildcard certificate to terminate HTTPS requests to the TAP cluster:
 
-```bash
+```execute
 cp tap-gitops-workshop/templates/ingress/* workshop-clusters/clusters/workshop/cluster-config/config/general
 ```
 
@@ -65,6 +88,9 @@ Update your `$WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/v
 - Set the `shared.ingress_domain` field to your wildcard domain.
 - Update your `cnrs` configuration so that your workloads will be assigned a DNS name inside the wildcard domain.
 - Point `tap_gui` at the TLS certificate we installed.
+```execute
+vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml
+```
 ```yaml
     shared:
       ingress_domain: workshop999.tap-pilot.com # change this to your domain
@@ -83,7 +109,7 @@ Update your `$WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/v
 
 Let's commit the changes to our GitOps repo, causing them to sync to our cluster.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/workshop-clusters
 git add . && git commit -m "Add TLS Ingress"
 git push -u origin main
