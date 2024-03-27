@@ -8,7 +8,7 @@ First, we will go through the process of configuring developer namespaces, which
 
 Copy the following files into your cluster's GitOps repo:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 mkdir workshop-clusters/clusters/workshop/cluster-config/namespace-provisioner
 cp -R tap-gitops-workshop/templates/namespace-provisioner/namespaces workshop-clusters/clusters/workshop/cluster-config/namespace-provisioner
@@ -19,6 +19,9 @@ The [Desired Namespaces](templates/namespace-provisioner/namespaces/desired-name
 ## Configure Namespace Provisioner in tap-values.yaml
 
 Add the following section to your `$WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml`. **NOTE:** You **must** substitute the Github URL here, with the URL of your GitOps repo.
+```execute
+vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml
+```
 
 ```yaml
     namespace_provisioner:
@@ -40,7 +43,7 @@ This points the namespace provisioner at your desired namespaces document, so th
 
 Let's commit the changes to our GitOps repo, causing them to sync to our cluster.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/workshop-clusters
 git add . && git commit -m "Add dev namespace"
 git push -u origin main
@@ -48,19 +51,19 @@ git push -u origin main
 
 In a minute or so, we will see the namespace provisioner create the namespace in our desired namespaces document.
 
-```bash
+```execute
 kubectl get ns developer-ns
 ```
 
 Already, some default configuration has been provisioned into our environment. Our TanzuNet credentials are loaded into a secret in the namespace:
 
-```bash
+```execute
 kubectl get secret registries-credentials -n developer-ns
 ```
 
 Also, the namespace provisioner added this secret as an `imagePullSecret` to our default service account.
 
-```bash
+```execute
 kubectl get sa default -n developer-ns -o yaml
 ```
 
@@ -70,7 +73,7 @@ We've got a process for spinning up new developer namespaces, but we still don't
 
 These credentials are sensitive, so we'll need to SOPS-encrypt them before adding them to our repo:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/enc
 cp ../tap-gitops-workshop/templates/namespace-provisioner/workshop-cluster-secrets.yaml .
 ```
@@ -81,13 +84,13 @@ This file contains an exported Secret named `tap-install/git-https`.
 In this example, this secret is equivalent to `tanzu-sync/sync-git`, but we could use a different credential for developer workloads and even decide to pull those configurations from different repositories than our control repo for TAP.
 
 You will also add the base64-encoded string for your registry credentials. They will be added to two secrets in this file, `registry-credentials` and `lsp-push-credentials`. Here is a command that will generate the base64 encoding that you can input for `.dockerconfigjson`
-```bash
+```execute
 kubectl create secret docker-registry registry-credentials --docker-server=[My Registry Server] --docker-username=[Registry Username] --docker-password=[Registry Password] --dry-run=client -o jsonpath='{.data.\.dockerconfigjson}'
 ```
 
 Once you have input these values, we can SOPS-encrypt them:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/enc
 export SOPS_AGE_RECIPIENTS=$(age-keygen -y key.txt)
 sops --encrypt workshop-cluster-secrets.yaml > workshop-cluster-secrets.sops.yaml
@@ -95,7 +98,7 @@ sops --encrypt workshop-cluster-secrets.yaml > workshop-cluster-secrets.sops.yam
 
 In the general folder for user-provided resources, will copy our SOPS-encrypted values, add a `SecretExport` resource in the `tap-install namespace that will authorize our secrets to be imported into the developer namespaces:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 mv enc/workshop-cluster-secrets.sops.yaml workshop-clusters/clusters/workshop/cluster-config/config/general
 cp tap-gitops-workshop/templates/namespace-provisioner/secretexport.yaml workshop-clusters/clusters/workshop/cluster-config/config/general
@@ -103,12 +106,15 @@ cp tap-gitops-workshop/templates/namespace-provisioner/secretexport.yaml worksho
 
 Now, we will create a folder for resources that we want Namespace Provisioner to deploy in every developer namespace. This folder contains a `SecretImport` resource that will copy the secrets we added from the `tap-install` namespace to the developer namespace:
 
-```bash
+```execute
 cd $WORKSHOP_ROOT
 cp -R tap-gitops-workshop/templates/namespace-provisioner/namespace-resources workshop-clusters/clusters/workshop/cluster-config/namespace-provisioner
 ```
 
 Update your `$WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml` file again. Add sections in the namespace provisioner configuration to look for the new `namespace-resources` directory we just created, and to add the Git secret we imported to the namespace's default service account. **NOTE:** You **must** substitute the Github URL here, with the URL of your GitOps repo.
+```execute
+vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml
+```
 
 ```yaml
     namespace_provisioner:
@@ -140,7 +146,7 @@ Also, we will add configuration to the `tap-values.yaml` for the `local_source_p
 
 Let's commit the changes to our GitOps repo, causing them to sync to our cluster.
 
-```bash
+```execute
 cd $WORKSHOP_ROOT/workshop-clusters
 git add . && git commit -m "Add dev namespace credentials"
 git push -u origin main
@@ -151,7 +157,7 @@ git push -u origin main
 Now we can test the developer namespace you've created on your cluster, `developer-ns`. If you already have the TAP IDE tooling installed on your local machine, you can proceed directly into Developer Getting Started activities for [VS Code](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-iterate-new-app-vscode.html) [IntelliJ](https://docs.vmware.com/en/VMware-Tanzu-Application-Platform/1.5/tap/getting-started-iterate-new-app-intellij.html).
 
 Alternatively, you can run this scripted process to test using the namespace. Start by cloning an application to your local machine
-   ```bash
+   ```execute
    cd $WORKSHOP_ROOT
    git clone https://github.com/Tanzu-Solutions-Engineering/tanzu-java-web-app
    cd tanzu-java-web-app
@@ -160,18 +166,18 @@ Alternatively, you can run this scripted process to test using the namespace. St
    ```
 
 Now, we will start the Tilt process that deploys the code to your developer namespace using a basic supply chain:
-   ```bash
+   ```execute
    tilt up --stream=true
    ```
 
 The first time you run this, the process will take a few minutes to complete. Once it is done, you can access the application in your browser at http://localhost:8080. Leave Tilt running in your terminal window, and open a second terminal window where we will edit one of the source code files.
 
-   ```bash
+   ```execute
    vim src/main/java/com/example/springboot/HelloController.java
    ```
 
 Change the string that is returned by the controller from `Greetings from Spring Boot + Tanzu!` to something else. Save your changes, exit the edit, and trigger a compile.
-   ```bash
+   ```execute
    ./mvnw compile
    ```
 
