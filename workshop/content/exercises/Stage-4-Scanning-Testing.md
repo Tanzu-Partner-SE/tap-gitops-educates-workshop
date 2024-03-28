@@ -10,6 +10,9 @@ kubectl delete workloads --all -n developer-ns
 ```
 
 Now, we can open `$WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/namespace-provisioner/namespaces/desired-namespaces.yaml` and replace the developer namespace with a workload namespace:
+```execute
+vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/namespace-provisioner/namespaces/desired-namespaces.yaml
+```
 
 ```yaml
 #@data/values
@@ -30,6 +33,9 @@ cp tap-gitops-workshop/templates/supply-chain/namespace-resources/* workshop-clu
 ## Configure scanning and testing supply chain in tap-values.yaml
 
 Now we will set up a supply chain appropriate for our build cluster. The default supply chain that gets installed is `basic`, which is appropriate for iterate clusters, but we will replace it with `testing_scanning`. We will also configure some of the additional packages, `grype` and `metadata_store`, that are used for scanning and recording vulnerabilities in your artifacts. Add these declarations to `$WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml`:
+```execute
+vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml
+```
 ```yaml
     supply_chain: testing_scanning
     

@@ -175,7 +175,7 @@ Now, we will start the Tilt process that deploys the code to your developer name
 The first time you run this, the process will take a few minutes to complete. Once it is done, you can access the application in your browser at http://localhost:8080. Leave Tilt running in your terminal window, and open a second terminal window where we will edit one of the source code files.
 
    ```execute
-   vim src/main/java/com/example/springboot/HelloController.java
+   vim $WORKSHOP_ROOT/tanzu-java-web-app/src/main/java/com/example/springboot/HelloController.java
    ```
 
 Change the string that is returned by the controller from `Greetings from Spring Boot + Tanzu!` to something else. Save your changes, exit the edit, and trigger a compile.

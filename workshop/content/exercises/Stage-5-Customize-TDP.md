@@ -8,6 +8,10 @@ We will start by adding a [Catalog Entry](https://backstage.io/docs/features/sof
 
 Open your `tap-values.yaml` file, and add the following configuration under `tap_gui.app_config`:
 
+```execute
+vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml
+```
+
 ```yaml
     tap_gui:
       app_config:
@@ -31,6 +35,9 @@ Once the changes have synced, you can go to your TDP home page, and you will see
 ## Add Github Repo Creation to Accelerators
 
 Ooh, the developers liked that! Let's give them another goodie. We're going to add a capability to Accelerators so that developers have the option to create a Github repo when they generate a new project. Go to your `tap-values.yaml` file, and add the following stanza under `tap_gui.app_config`:
+```execute
+vi vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml
+```
 
 ```yaml
     tap_gui:

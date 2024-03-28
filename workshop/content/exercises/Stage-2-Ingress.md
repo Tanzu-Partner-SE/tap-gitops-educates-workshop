@@ -36,7 +36,8 @@ Create the certificate using the below command. Change the domain name to your d
 
 replace domain name with your domain name
 ``` copy
-certbot certonly --manual --preferred-challenges=dns --email=your-email --agree-tos -d "*.{your domain name}" --config-dir=certificates/ --work-dir=certificates/ --logs-dir=certificates/
+cd $WORKSHOP_ROOT
+certbot certonly --manual --preferred-challenges=dns --email={your-email} --agree-tos -d "*.{your domain name}" --config-dir=certificates/ --work-dir=certificates/ --logs-dir=certificates/
 ```
 
 Now, let's create a secret for this certificate that can be installed onto our cluster. Be sure to replace the filenames in this command with the filenames of your certificate files.
