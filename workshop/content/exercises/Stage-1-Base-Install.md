@@ -28,7 +28,7 @@ Now all SSH sessions to the jump-server will properly set the variable.
 
 Here we will create the GitOps repo that records the configuration of your TAP install. All updates to the platform will be made to this repo, which will then propagate out to your installed environment.
 
-First, download the base template for your repo from TanzuNet. Go the [latest release page for Tanzu Application Platform](https://network.tanzu.vmware.com/products/tanzu-application-platform/#/releases/1346010), and download `tanzu-gitops-ri-0.2.5.tgz` to your local machine. Copy the tgz file to $WORKSHOP_ROOT. An alternative is to use the pivnet CLI to download it with the following command:
+First, download the base template for your repo from TanzuNet. Go the [latest release page for Tanzu Application Platform](https://network.tanzu.vmware.com/products/tanzu-application-platform/#/releases/1346010), and download `tanzu-gitops-ri-0.4.1.tgz` to your local machine. Copy the tgz file to $WORKSHOP_ROOT. An alternative is to use the pivnet CLI to download it with the following command:
 
 ```execute
 cd $WORKSHOP_ROOT
