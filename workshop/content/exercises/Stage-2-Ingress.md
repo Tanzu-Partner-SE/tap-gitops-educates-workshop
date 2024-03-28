@@ -41,7 +41,7 @@ certbot certonly --manual --preferred-challenges=dns --email=your-email --agree-
 
 Now, let's create a secret for this certificate that can be installed onto our cluster. Be sure to replace the filenames in this command with the filenames of your certificate files.
 ```copy
-chmod 600 /home/tapworkshopuser/tap/{your domain name}/live/certificates/privkey.pem
+chmod 600 /home/tapworkshopuser/tap/certificates/live/{your domain name}/privkey.pem
 ```
 ```copy
 kubectl create secret tls tls -n contour-tls --cert=/home/tapworkshopuser/tap/certificates/live/{your domain name}/fullchain.pem --key=/home/tapworkshopuser/tap/certificates/live/{your domain name}/privkey.pem --dry-run=client -o yaml > $WORKSHOP_ROOT/enc/certificate.yaml
