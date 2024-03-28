@@ -119,7 +119,8 @@ cd enc
 age-keygen -o key.txt
 export SOPS_AGE_RECIPIENTS=$(age-keygen -y key.txt)
 export SOPS_AGE_KEY=$(cat key.txt)
-
+```
+```excecute
 cp ../tap-gitops-workshop/templates/install/tanzu-sync-values.yaml .
 cp ../tap-gitops-workshop/templates/install/tap-sensitive-values.yaml .
 ```
@@ -158,7 +159,10 @@ OK, we've got our cluster configuration the way we want it. Let's commit to Git,
 cd $WORKSHOP_ROOT/workshop-clusters
 git add . && git commit -m "Configure workshop cluster encryption, domain, and credentials"
 git push -u origin main 
+```
+Setup the configuration
 
+```execute
 cd clusters/workshop
 ./tanzu-sync/scripts/configure.sh
 ```
