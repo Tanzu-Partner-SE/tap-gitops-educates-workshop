@@ -105,7 +105,7 @@ Clone this repo into your workshop root directory. It won't be part of your GitO
 
 ```execute
 cd $WORKSHOP_ROOT
-git clone https://github.com/tanzu-end-to-end/tap-gitops-workshop
+git clone https://github.com/anilvmware/tap-gitops-workshop
 cp tap-gitops-workshop/templates/install/tap-values.yaml workshop-clusters/clusters/workshop/cluster-config/values
 ```
 
@@ -137,7 +137,7 @@ age-keygen -o key.txt
 export SOPS_AGE_RECIPIENTS=$(age-keygen -y key.txt)
 export SOPS_AGE_KEY=$(cat key.txt)
 ```
-```excecute
+```execute
 cp ../tap-gitops-workshop/templates/install/tanzu-sync-values.yaml .
 cp ../tap-gitops-workshop/templates/install/tap-sensitive-values.yaml .
 ```
