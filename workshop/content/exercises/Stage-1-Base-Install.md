@@ -35,12 +35,15 @@ cd $WORKSHOP_ROOT
 pivnet download-product-files --product-slug='tanzu-application-platform' --release-version='1.8.1' --product-file-id=1739744
 ```
 
-Initialize the Git repo on your local machine:
+Initialize the Git repo on your local machine: If you already have the repo from the previous installation, clone workshop-clusters repository
 
 ```execute
 cd $WORKSHOP_ROOT
 mkdir -p workshop-clusters
 tar xvf tanzu-gitops-ri-0.4.1.tgz -C workshop-clusters
+```
+Push to the Git Repo
+```execute
 cd workshop-clusters
 git init -b main
 git add . && git commit -m "Initialize Tanzu GitOps RI"
@@ -53,7 +56,10 @@ Now push the local repo to Github, where your cluster can access it. If you have
 ```execute
 gh repo create --source . --push --private
 ```
-
+if you already have the repo push the changes
+```execute
+git push -u origin main
+````
 This repo does not need to be private, but it's good hygiene.
 
 The repo we have created can store the configuration for **all** of your TAP clusters. Each cluster will have its own subfolder in the GitOps repo where its configuration is stored. Let's create the cluster subfolder for `workshop`, which will be the name of our workshop cluster.
@@ -170,5 +176,14 @@ We're ready to install! Please make sure that your kubeconfig is pointed at the 
 ```execute
 ./tanzu-sync/scripts/deploy.sh
 ```
+You can watch the installation status in terminal 2
+```copy-2
+ssh tapworkshopuser@xx.xx.xx.xx -i /home/eduk8s/azure-workshop-ssh -o StrictHostKeyChecking=no
+```
+Check the installation status
+```excute-2
+tanzu package installed list -A
+```
+
 
 ## [Next Stage: Enable Ingress >>](Stage-2-Ingress.md)
