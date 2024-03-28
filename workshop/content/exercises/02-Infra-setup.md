@@ -32,11 +32,8 @@ Used to SSH into the jumpbox.
 - `gh_username` (string) - Username of the GitHub account.
 - `gh_token` (string) - Value of the GitHub personal access token.
   **NOTE:** For Azure, you must use an RSA SSH key, and it's recommended that your key indicate your desired SSH username (not email) or you may have validation issues with the Azure terraform module.  
-  If you need to generate a new key, here's an example that will create a new keypair in your current directory: Let's use username as tapworkshopuser
+  An SSH Key is already generated for you with username tapworkshopuser
 
-  ```execute
-  ssh-keygen -m PEM -t rsa -b 4096 -f "./azure-workshop-ssh" -C tapworkshopuser
-  ```  
   **NOTE:** If you choose to use a GitHub Personal Access Token, the minimum required scopes for the `gh` CLI are `repo` (all) and `read:org`. You can add scopes for your tokens in the [GitHub Token Settings](https://github.com/settings/tokens/).
 Utilizing Terraform conventions, make a copy `terraform.tfvars.example` and remove the `.example` extension. Edit this file and add values. Descriptions of the values below:
   ```execute

@@ -1,10 +1,10 @@
 tanzu_network_refresh_token          = ""
 tanzu_registry_username              = ""
 tanzu_registry_password              = ""
-ssh_private_key_path                 = ""
+ssh_private_key_path                 = "/home/eduk8s/azure-workshop-ssh"
 ssh_private_key_passphrase_protected = false
-ssh_public_key_path                  = ""
-ssh_username                         = ""
+ssh_public_key_path                  = "/home/eduk8s/azure-workshop-ssh"
+ssh_username                         = "tapworkshopuser"
 
 gh_username                          = ""
 gh_token                             = ""
