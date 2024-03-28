@@ -36,31 +36,16 @@ Install certboat
 sudo snap install --classic certbot
 ```
 Create the certificate using the below command. Change the domain name to your domain name
-``` copy
-mkdir "your domain name"
-```
+
 replace domain name with your domain name
 ``` copy
-certbot certonly --manual --preferred-challenges=dns --email=your-email --agree-tos -d "*.your domain name" --config-dir=your domain name/ --work-dir=your domain name/ --logs-dir=your domain name/
+certbot certonly --manual --preferred-challenges=dns --email=your-email --agree-tos -d "*.your domain name" --config-dir=certificates/ --work-dir=certificates/ --logs-dir=certificates/
 ```
-Copy the certificate to $WORKSHOP_ROOT/certificates
-``` copy
-cp $WORKSHOP_ROOT/certificates/your domain name/live/your domain name/fullchain.pem $WORKSHOP_ROOT/certificates/fullchain.pem
-```
-```copy
-cp $WORKSHOP_ROOT/certificates/your domain name/live/your domain name/privkey.pem $WORKSHOP_ROOT/certificates/privkey.pem
-```
-Create the tls certificate
-``` copy
-kubectl create secret tls your domain name-tls --cert=/home/tapworkshopuser/tap/certificates/fullchain.pem --key=/home/tapworkshopuser/tap/certificates/privkey.pem --dry-run=client -o yaml > example.com-tls.yaml
-```
-
 
 Now, let's create a secret for this certificate that can be installed onto our cluster. Be sure to replace the filenames in this command with the filenames of your certificate files.
 ```execute
-cd $WORKSHOP_ROOT/certificates
-chmod 600 privkey.pem
-kubectl create secret tls tls -n contour-tls --cert=fullchain.pem --key=privkey.pem --dry-run=client -o yaml > $WORKSHOP_ROOT/enc/certificate.yaml
+chmod 600 /home/tapworkshopuser/tap/certificates/live/certificates/privkey.pem
+kubectl create secret tls tls -n contour-tls --cert=/home/tapworkshopuser/tap/cert/live/cert/fullchain.pem --key=/home/tapworkshopuser/tap/cert/live/cert/privkey.pem --dry-run=client -o yaml > $WORKSHOP_ROOT/enc/certificate.yaml
 ```
 
 This certificate file has sensitive private key data, so we need to encrypt it before adding it to our cluster's GitOps repo.
