@@ -27,10 +27,7 @@ mkdir $WORKSHOP_ROOT/certificates
 ```
 Go to the spreadsheet, and download the certificate (fullchain.pem) and the private key (privkey.pem) in columns B and C for your domain. Copy these 2 files into the `certificates` directory you created.
 ## If you are using your own domain and you need a self signged certificate follow the below instructions
-go to certifcates directory
-```execute
-cd $WORKSHOP_ROOT/certificates
-```
+
 Install certboat
 ```execute
 sudo snap install --classic certbot
@@ -39,13 +36,15 @@ Create the certificate using the below command. Change the domain name to your d
 
 replace domain name with your domain name
 ``` copy
-certbot certonly --manual --preferred-challenges=dns --email=your-email --agree-tos -d "*.your domain name" --config-dir=certificates/ --work-dir=certificates/ --logs-dir=certificates/
+certbot certonly --manual --preferred-challenges=dns --email=your-email --agree-tos -d "*.{your domain name}" --config-dir=certificates/ --work-dir=certificates/ --logs-dir=certificates/
 ```
 
 Now, let's create a secret for this certificate that can be installed onto our cluster. Be sure to replace the filenames in this command with the filenames of your certificate files.
 ```execute
 chmod 600 /home/tapworkshopuser/tap/certificates/live/certificates/privkey.pem
-kubectl create secret tls tls -n contour-tls --cert=/home/tapworkshopuser/tap/cert/live/cert/fullchain.pem --key=/home/tapworkshopuser/tap/cert/live/cert/privkey.pem --dry-run=client -o yaml > $WORKSHOP_ROOT/enc/certificate.yaml
+```
+```copy
+kubectl create secret tls tls -n contour-tls --cert=/home/tapworkshopuser/tap/certificates/live/{your domain name}/fullchain.pem --key=/home/tapworkshopuser/tap/certificates/live/{your domain name}/privkey.pem --dry-run=client -o yaml > $WORKSHOP_ROOT/enc/certificate.yaml
 ```
 
 This certificate file has sensitive private key data, so we need to encrypt it before adding it to our cluster's GitOps repo.
