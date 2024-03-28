@@ -3,7 +3,7 @@ tanzu_registry_username              = ""
 tanzu_registry_password              = ""
 ssh_private_key_path                 = "/home/eduk8s/azure-workshop-ssh"
 ssh_private_key_passphrase_protected = false
-ssh_public_key_path                  = "/home/eduk8s/azure-workshop-ssh"
+ssh_public_key_path                  = "/home/eduk8s/azure-workshop-ssh.pub"
 ssh_username                         = "tapworkshopuser"
 
 gh_username                          = ""
