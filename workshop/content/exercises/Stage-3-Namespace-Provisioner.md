@@ -84,10 +84,12 @@ This file contains an exported Secret named `tap-install/git-https`.
 In this example, this secret is equivalent to `tanzu-sync/sync-git`, but we could use a different credential for developer workloads and even decide to pull those configurations from different repositories than our control repo for TAP.
 
 You will also add the base64-encoded string for your registry credentials. They will be added to two secrets in this file, `registry-credentials` and `lsp-push-credentials`. Here is a command that will generate the base64 encoding that you can input for `.dockerconfigjson`
-```execute
+```copy
 kubectl create secret docker-registry registry-credentials --docker-server=[My Registry Server] --docker-username=[Registry Username] --docker-password=[Registry Password] --dry-run=client -o jsonpath='{.data.\.dockerconfigjson}'
 ```
-
+```execute
+vi $WORKSHOP_ROOT/enc/workshop-cluster-secrets.yaml
+```
 Once you have input these values, we can SOPS-encrypt them:
 
 ```execute
