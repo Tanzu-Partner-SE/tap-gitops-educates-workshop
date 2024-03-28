@@ -30,6 +30,8 @@ Here we will create the GitOps repo that records the configuration of your TAP i
 
 First, download the base template for your repo from TanzuNet. Go the [latest release page for Tanzu Application Platform](https://network.tanzu.vmware.com/products/tanzu-application-platform/#/releases/1346010), and download `tanzu-gitops-ri-0.4.1.tgz` to your local machine. Copy the tgz file to $WORKSHOP_ROOT. An alternative is to use the pivnet CLI to download it with the following command:
 
+### Fr TAP 1.8
+
 ```execute
 cd $WORKSHOP_ROOT
 pivnet download-product-files --product-slug='tanzu-application-platform' --release-version='1.8.1' --product-file-id=1739744
@@ -42,6 +44,21 @@ cd $WORKSHOP_ROOT
 mkdir -p workshop-clusters
 tar xvf tanzu-gitops-ri-0.4.1.tgz -C workshop-clusters
 ```
+### Fr TAP 1.6 ----------
+
+```execute
+cd $WORKSHOP_ROOT
+pivnet download-product-files --product-slug='tanzu-application-platform' --release-version='1.6.1' --product-file-id=1549358
+```
+
+Initialize the Git repo on your local machine: If you already have the repo from the previous installation, clone workshop-clusters repository
+
+```execute
+cd $WORKSHOP_ROOT
+mkdir -p workshop-clusters
+tar xvf tanzu-gitops-ri-0.2.5.tgz -C workshop-clusters
+```
+------------
 Push to the Git Repo
 ```execute
 cd workshop-clusters
