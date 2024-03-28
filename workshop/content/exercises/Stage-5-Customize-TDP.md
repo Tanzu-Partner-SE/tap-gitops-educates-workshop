@@ -36,7 +36,7 @@ Once the changes have synced, you can go to your TDP home page, and you will see
 
 Ooh, the developers liked that! Let's give them another goodie. We're going to add a capability to Accelerators so that developers have the option to create a Github repo when they generate a new project. Go to your `tap-values.yaml` file, and add the following stanza under `tap_gui.app_config`:
 ```execute
-vi vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml
+vi $WORKSHOP_ROOT/workshop-clusters/clusters/workshop/cluster-config/values/tap-values.yaml
 ```
 
 ```yaml
