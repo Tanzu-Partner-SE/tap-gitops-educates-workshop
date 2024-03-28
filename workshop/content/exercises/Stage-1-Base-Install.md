@@ -181,11 +181,11 @@ We're ready to install! Please make sure that your kubeconfig is pointed at the 
 ./tanzu-sync/scripts/deploy.sh
 ```
 You can watch the installation status in terminal 2
-```copy-2
+```copy
 ssh tapworkshopuser@xx.xx.xx.xx -i /home/eduk8s/azure-workshop-ssh -o StrictHostKeyChecking=no
 ```
 Check the installation status
-```excute-2
+```execute-2
 tanzu package installed list -A
 ```
 
