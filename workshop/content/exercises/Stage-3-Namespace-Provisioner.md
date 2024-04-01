@@ -171,6 +171,14 @@ Now, we will start the Tilt process that deploys the code to your developer name
    ```execute
    tilt up --stream=true
    ```
+Check the workload status
+```execute-2
+tanzu apps workload list -n developer-ns
+```
+Get workload details
+```execute-2
+tanzu apps workload get tanzu-java-web-app -n developer-ns
+```
 
 The first time you run this, the process will take a few minutes to complete. Once it is done, you can access the application in your browser at http://localhost:8080. Leave Tilt running in your terminal window, and open a second terminal window where we will edit one of the source code files.
 
