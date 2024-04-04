@@ -10,4 +10,19 @@ modules:
     - exercises/Stage-3-Namespace-Provisioner
     - exercises/Stage-4-Scanning-Testing
     - exercises/Stage-5-Customize-TDP
+    - exercises/03-App-Accelerator
+    - exercises/04-IDE-Tools
+    - exercises/05-Iterative-Development
+    - exercises/06-Submitting-Build
+    - exercises/07-App-Live-View
+    - exercises/08-service-binding
+    - exercises/09-Supply-Chain
+    - exercises/10-Deliverable
+    - exercises/11-Workload
+    - exercises/12-Catrographer
+    - exercises/13-metastore
+    - exercises/14-APIDocs
+    - exercises/15-TechDocs
+    - exercises/16-Security-Analysis
+    - exercises/18-cleanup
     - exercises/Stage-6-reinstall

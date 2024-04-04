@@ -22,7 +22,52 @@ modules:
       exit_sign: Customize Portal 
     exercises/Stage-5-Customize-TDP:
       name: Customize Portal 
-      exit_sign: Re-Deploy
+      exit_sign: App-Accelerator
+    exercises/03-App-Accelerator:
+      name: App-Accelerator 
+      exit_sign: IDE-Tools
+    exercises/04-IDE-Tools:
+      name: IDE-Tools 
+      exit_sign: Iterative-Development
+    exercises/05-Iterative-Development:
+      name: Iterative-Development 
+      exit_sign: Submitting-Build
+    exercises/06-Submitting-Build:
+      name: Submitting-Build 
+      exit_sign: App-Live-View
+    exercises/07-App-Live-View:
+      name: App-Live-View 
+      exit_sign: service-binding
+    exercises/08-service-binding:
+      name: service-binding 
+      exit_sign: Supply-Chain
+    exercises/09-Supply-Chain:
+      name: Supply-Chain 
+      exit_sign: Deliverable
+    exercises/10-Deliverable:
+      name: Deliverable 
+      exit_sign: Workload
+    exercises/11-Workload:
+      name: Workload 
+      exit_sign: Catrographer
+    exercises/12-Catrographer:
+      name: Catrographer 
+      exit_sign: metastore
+    exercises/13-metastore:
+      name: metastore 
+      exit_sign: APIDocs
+    exercises/14-APIDocs:
+      name: APIDocs 
+      exit_sign: TechDocs
+    exercises/15-TechDocs:
+      name: TechDocs 
+      exit_sign: Security-Analysis
+    exercises/16-Security-Analysis:
+      name: Security-Analysis 
+      exit_sign: cleanup
+    exercises/18-cleanup:
+      name: cleanup 
+      exit_sign: Reinstall
     exercises/Stage-6-reinstall:
       name: Reinstall 
       exit_sign: Finish Workshop
