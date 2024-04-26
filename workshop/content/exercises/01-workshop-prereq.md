@@ -1,6 +1,6 @@
 ## Tanzu Application Platform GitOps Workshop
 
-Welcome! In this hands-on workshop, participants will learn GitOps benefits and best practices. They will bring their own Kubernetes cluster and perform a fresh deployment of TAP using the GitOps installer. They will experiment with incrementally adding new features, in-place upgrades, and uninstall-restore. We will discuss how to preconfigure working environments for pilots, so that customers are spending time getting value from TAP, not learning the install process.
+Test!!Welcome! In this hands-on workshop, participants will learn GitOps benefits and best practices. They will bring their own Kubernetes cluster and perform a fresh deployment of TAP using the GitOps installer. They will experiment with incrementally adding new features, in-place upgrades, and uninstall-restore. We will discuss how to preconfigure working environments for pilots, so that customers are spending time getting value from TAP, not learning the install process.
 
 ### Prerequisites
 
